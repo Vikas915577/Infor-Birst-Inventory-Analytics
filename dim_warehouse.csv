@@ -1,0 +1,5 @@
+warehouse_id,warehouse_name,region
+WH-01,North Hub,North
+WH-02,West Hub,West
+WH-03,South Hub,South
+WH-04,Central Hub,Central

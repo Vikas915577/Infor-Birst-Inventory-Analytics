@@ -1,0 +1,6 @@
+DEMO FINDINGS — synthetic dataset only
+
+- 220 of 480 records (45.8%) have days of supply below lead time.
+- 161 of 480 records (33.5%) are at/below reorder point.
+- North Hub has highest stockout-risk record count (59).
+- Electronics has largest inventory value (3,262,097.64 currency units).

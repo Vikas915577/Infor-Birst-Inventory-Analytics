@@ -1,0 +1,10 @@
+metric,value
+Snapshot date,2026-10-12
+Inventory records,480
+Unique SKUs,120
+Warehouses,4
+On-hand units,81978
+Inventory value,9654146.75
+Records below reorder point,161
+Records at stockout risk,220
+Out-of-stock records,0

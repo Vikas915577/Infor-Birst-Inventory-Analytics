@@ -1,0 +1,6 @@
+category,on_hand_units,inventory_value,stockout_risk_records,below_reorder_records
+Apparel,17940,2059531.81,44,30
+Electronics,14680,3262097.64,41,31
+Home & Living,16873,1443004.43,43,30
+Industrial,17848,1449017.02,43,38
+Office Supplies,14637,1440495.85,49,32

@@ -1,0 +1,12 @@
+{
+  "project_name": "Inventory & Stock Risk Analytics",
+  "version": "1.0.0",
+  "primary_bi_tool": "Infor Birst",
+  "data_type": "synthetic demonstration",
+  "snapshot_date": "2026-10-12",
+  "fact_rows": 480,
+  "unique_skus": 120,
+  "warehouses": 4,
+  "analysis_exit_code": 0,
+  "tests_exit_code": 0
+}

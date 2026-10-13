@@ -1,0 +1,5 @@
+warehouse_id,warehouse_name,region,inventory_records,on_hand_units,inventory_value,below_reorder_records,stockout_risk_records,out_of_stock_records
+WH-01,North Hub,North,120,19065,2197413.11,47,59,0
+WH-02,West Hub,West,120,20372,2228815.06,44,58,0
+WH-03,South Hub,South,120,20265,2523507.1,35,55,0
+WH-04,Central Hub,Central,120,22276,2704411.48,35,48,0
