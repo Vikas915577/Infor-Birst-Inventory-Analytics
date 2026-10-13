@@ -1,4 +1,4 @@
--- PostgreSQL-compatible starter schema; all supplied data are synthetic.
+-- PostgreSQL schema: all supplied data are synthetic.
 CREATE TABLE dim_product (sku_id VARCHAR(20) PRIMARY KEY, product_name VARCHAR(120) NOT NULL, category VARCHAR(80) NOT NULL, supplier VARCHAR(120) NOT NULL, unit_cost NUMERIC(12,2) NOT NULL CHECK (unit_cost >= 0), reorder_point INTEGER NOT NULL CHECK (reorder_point >= 0), lead_time_days INTEGER NOT NULL CHECK (lead_time_days >= 0));
 CREATE TABLE dim_warehouse (warehouse_id VARCHAR(20) PRIMARY KEY, warehouse_name VARCHAR(80) NOT NULL, region VARCHAR(80) NOT NULL);
 CREATE TABLE fact_inventory_snapshot (snapshot_id VARCHAR(30) PRIMARY KEY, snapshot_date DATE NOT NULL, sku_id VARCHAR(20) NOT NULL REFERENCES dim_product(sku_id), warehouse_id VARCHAR(20) NOT NULL REFERENCES dim_warehouse(warehouse_id), on_hand_qty INTEGER NOT NULL CHECK (on_hand_qty >= 0), avg_daily_demand NUMERIC(12,2) NOT NULL CHECK (avg_daily_demand >= 0));

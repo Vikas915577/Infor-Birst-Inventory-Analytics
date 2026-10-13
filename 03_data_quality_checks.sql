@@ -1,4 +1,5 @@
--- Additional data-quality checks (PostgreSQL)
+-- Data quality and reconciliation checks. Expected to return no rows for duplicate grain / broken foreign keys.
+SELECT snapshot_date,sku_id,warehouse_id,COUNT(*) AS duplicate_count FROM fact_inventory_snapshot GROUP BY snapshot_date,sku_id,warehouse_id HAVING COUNT(*)>1;
+SELECT f.* FROM fact_inventory_snapshot f LEFT JOIN dim_product p USING(sku_id) LEFT JOIN dim_warehouse w USING(warehouse_id) WHERE p.sku_id IS NULL OR w.warehouse_id IS NULL;
 SELECT * FROM fact_inventory_snapshot WHERE on_hand_qty<0 OR avg_daily_demand<0;
-SELECT * FROM dim_product WHERE unit_cost IS NULL OR unit_cost<0 OR reorder_point IS NULL OR reorder_point<0 OR lead_time_days IS NULL OR lead_time_days<0;
-SELECT w.warehouse_name,COUNT(f.snapshot_id) AS record_count FROM dim_warehouse w LEFT JOIN fact_inventory_snapshot f USING(warehouse_id) GROUP BY w.warehouse_name ORDER BY w.warehouse_name;
+SELECT warehouse_id,COUNT(*) AS record_count FROM fact_inventory_snapshot GROUP BY warehouse_id ORDER BY warehouse_id;
