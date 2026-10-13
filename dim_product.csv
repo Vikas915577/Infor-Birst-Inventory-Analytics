@@ -1,121 +1,121 @@
 sku_id,product_name,category,supplier,unit_cost,reorder_point,lead_time_days
 SKU-0001,Electronics Item 001,Electronics,Northstar Supply,276.12,155,10
-SKU-0002,OfficeSupplies Item 002,Office Supplies,Metro Wholesale,160.76,164,15
-SKU-0003,Home&Living Item 003,Home & Living,Prime Components,110.83,70,17
+SKU-0002,Office Supplies Item 002,Office Supplies,Metro Wholesale,160.76,164,15
+SKU-0003,Home & Living Item 003,Home & Living,Prime Components,110.83,70,17
 SKU-0004,Industrial Item 004,Industrial,BluePeak Trading,77.26,22,21
 SKU-0005,Apparel Item 005,Apparel,Summit Distribution,26.77,29,5
 SKU-0006,Electronics Item 006,Electronics,Cedar Source,423.3,82,5
-SKU-0007,OfficeSupplies Item 007,Office Supplies,UrbanLine Supply,87.26,135,19
-SKU-0008,Home&Living Item 008,Home & Living,Atlas Merchants,127.14,173,6
+SKU-0007,Office Supplies Item 007,Office Supplies,UrbanLine Supply,87.26,135,19
+SKU-0008,Home & Living Item 008,Home & Living,Atlas Merchants,127.14,173,6
 SKU-0009,Industrial Item 009,Industrial,Northstar Supply,174.14,144,11
 SKU-0010,Apparel Item 010,Apparel,Metro Wholesale,111.27,145,10
 SKU-0011,Electronics Item 011,Electronics,Prime Components,254.48,66,16
-SKU-0012,OfficeSupplies Item 012,Office Supplies,BluePeak Trading,46.11,175,14
-SKU-0013,Home&Living Item 013,Home & Living,Summit Distribution,144.86,100,8
+SKU-0012,Office Supplies Item 012,Office Supplies,BluePeak Trading,46.11,175,14
+SKU-0013,Home & Living Item 013,Home & Living,Summit Distribution,144.86,100,8
 SKU-0014,Industrial Item 014,Industrial,Cedar Source,135.25,42,11
 SKU-0015,Apparel Item 015,Apparel,UrbanLine Supply,177.85,126,18
 SKU-0016,Electronics Item 016,Electronics,Atlas Merchants,46.96,147,20
-SKU-0017,OfficeSupplies Item 017,Office Supplies,Northstar Supply,9.83,143,3
-SKU-0018,Home&Living Item 018,Home & Living,Metro Wholesale,59.11,44,21
+SKU-0017,Office Supplies Item 017,Office Supplies,Northstar Supply,9.83,143,3
+SKU-0018,Home & Living Item 018,Home & Living,Metro Wholesale,59.11,44,21
 SKU-0019,Industrial Item 019,Industrial,Prime Components,50.35,81,5
 SKU-0020,Apparel Item 020,Apparel,BluePeak Trading,127.4,104,18
 SKU-0021,Electronics Item 021,Electronics,Summit Distribution,39.26,29,6
-SKU-0022,OfficeSupplies Item 022,Office Supplies,Cedar Source,44.4,130,3
-SKU-0023,Home&Living Item 023,Home & Living,UrbanLine Supply,117.44,54,8
+SKU-0022,Office Supplies Item 022,Office Supplies,Cedar Source,44.4,130,3
+SKU-0023,Home & Living Item 023,Home & Living,UrbanLine Supply,117.44,54,8
 SKU-0024,Industrial Item 024,Industrial,Atlas Merchants,96.21,144,8
 SKU-0025,Apparel Item 025,Apparel,Northstar Supply,110.59,176,9
 SKU-0026,Electronics Item 026,Electronics,Metro Wholesale,226.62,64,18
-SKU-0027,OfficeSupplies Item 027,Office Supplies,Prime Components,108.2,119,18
-SKU-0028,Home&Living Item 028,Home & Living,BluePeak Trading,89.44,144,18
+SKU-0027,Office Supplies Item 027,Office Supplies,Prime Components,108.2,119,18
+SKU-0028,Home & Living Item 028,Home & Living,BluePeak Trading,89.44,144,18
 SKU-0029,Industrial Item 029,Industrial,Summit Distribution,14.0,167,6
 SKU-0030,Apparel Item 030,Apparel,Cedar Source,47.29,158,12
 SKU-0031,Electronics Item 031,Electronics,UrbanLine Supply,168.73,97,17
-SKU-0032,OfficeSupplies Item 032,Office Supplies,Atlas Merchants,134.85,60,10
-SKU-0033,Home&Living Item 033,Home & Living,Northstar Supply,176.03,64,11
+SKU-0032,Office Supplies Item 032,Office Supplies,Atlas Merchants,134.85,60,10
+SKU-0033,Home & Living Item 033,Home & Living,Northstar Supply,176.03,64,11
 SKU-0034,Industrial Item 034,Industrial,Metro Wholesale,61.23,137,19
 SKU-0035,Apparel Item 035,Apparel,Prime Components,108.66,30,19
 SKU-0036,Electronics Item 036,Electronics,BluePeak Trading,53.59,146,20
-SKU-0037,OfficeSupplies Item 037,Office Supplies,Summit Distribution,105.62,103,14
-SKU-0038,Home&Living Item 038,Home & Living,Cedar Source,47.81,40,21
+SKU-0037,Office Supplies Item 037,Office Supplies,Summit Distribution,105.62,103,14
+SKU-0038,Home & Living Item 038,Home & Living,Cedar Source,47.81,40,21
 SKU-0039,Industrial Item 039,Industrial,UrbanLine Supply,62.4,91,12
 SKU-0040,Apparel Item 040,Apparel,Atlas Merchants,140.7,127,15
 SKU-0041,Electronics Item 041,Electronics,Northstar Supply,162.79,129,8
-SKU-0042,OfficeSupplies Item 042,Office Supplies,Metro Wholesale,91.81,46,15
-SKU-0043,Home&Living Item 043,Home & Living,Prime Components,130.71,148,20
+SKU-0042,Office Supplies Item 042,Office Supplies,Metro Wholesale,91.81,46,15
+SKU-0043,Home & Living Item 043,Home & Living,Prime Components,130.71,148,20
 SKU-0044,Industrial Item 044,Industrial,BluePeak Trading,23.53,159,8
 SKU-0045,Apparel Item 045,Apparel,Summit Distribution,154.9,109,4
 SKU-0046,Electronics Item 046,Electronics,Cedar Source,415.06,50,6
-SKU-0047,OfficeSupplies Item 047,Office Supplies,UrbanLine Supply,178.35,23,16
-SKU-0048,Home&Living Item 048,Home & Living,Atlas Merchants,3.4,129,20
+SKU-0047,Office Supplies Item 047,Office Supplies,UrbanLine Supply,178.35,23,16
+SKU-0048,Home & Living Item 048,Home & Living,Atlas Merchants,3.4,129,20
 SKU-0049,Industrial Item 049,Industrial,Northstar Supply,85.67,92,5
 SKU-0050,Apparel Item 050,Apparel,Metro Wholesale,38.27,27,10
 SKU-0051,Electronics Item 051,Electronics,Prime Components,83.32,31,13
-SKU-0052,OfficeSupplies Item 052,Office Supplies,BluePeak Trading,46.95,49,8
-SKU-0053,Home&Living Item 053,Home & Living,Summit Distribution,52.88,136,7
+SKU-0052,Office Supplies Item 052,Office Supplies,BluePeak Trading,46.95,49,8
+SKU-0053,Home & Living Item 053,Home & Living,Summit Distribution,52.88,136,7
 SKU-0054,Industrial Item 054,Industrial,Cedar Source,51.28,163,14
 SKU-0055,Apparel Item 055,Apparel,UrbanLine Supply,132.63,27,21
 SKU-0056,Electronics Item 056,Electronics,Atlas Merchants,439.0,111,15
-SKU-0057,OfficeSupplies Item 057,Office Supplies,Northstar Supply,139.67,20,4
-SKU-0058,Home&Living Item 058,Home & Living,Metro Wholesale,173.25,101,6
+SKU-0057,Office Supplies Item 057,Office Supplies,Northstar Supply,139.67,20,4
+SKU-0058,Home & Living Item 058,Home & Living,Metro Wholesale,173.25,101,6
 SKU-0059,Industrial Item 059,Industrial,Prime Components,70.22,77,17
 SKU-0060,Apparel Item 060,Apparel,BluePeak Trading,44.92,42,11
 SKU-0061,Electronics Item 061,Electronics,Summit Distribution,93.12,25,9
-SKU-0062,OfficeSupplies Item 062,Office Supplies,Cedar Source,4.82,41,20
-SKU-0063,Home&Living Item 063,Home & Living,UrbanLine Supply,44.66,93,12
+SKU-0062,Office Supplies Item 062,Office Supplies,Cedar Source,4.82,41,20
+SKU-0063,Home & Living Item 063,Home & Living,UrbanLine Supply,44.66,93,12
 SKU-0064,Industrial Item 064,Industrial,Atlas Merchants,38.96,39,14
 SKU-0065,Apparel Item 065,Apparel,Northstar Supply,125.85,172,9
 SKU-0066,Electronics Item 066,Electronics,Metro Wholesale,244.91,30,7
-SKU-0067,OfficeSupplies Item 067,Office Supplies,Prime Components,57.94,21,17
-SKU-0068,Home&Living Item 068,Home & Living,BluePeak Trading,22.81,71,12
+SKU-0067,Office Supplies Item 067,Office Supplies,Prime Components,57.94,21,17
+SKU-0068,Home & Living Item 068,Home & Living,BluePeak Trading,22.81,71,12
 SKU-0069,Industrial Item 069,Industrial,Summit Distribution,128.99,136,5
 SKU-0070,Apparel Item 070,Apparel,Cedar Source,141.22,76,12
 SKU-0071,Electronics Item 071,Electronics,UrbanLine Supply,221.57,42,7
-SKU-0072,OfficeSupplies Item 072,Office Supplies,Atlas Merchants,150.22,48,16
-SKU-0073,Home&Living Item 073,Home & Living,Northstar Supply,135.16,86,9
+SKU-0072,Office Supplies Item 072,Office Supplies,Atlas Merchants,150.22,48,16
+SKU-0073,Home & Living Item 073,Home & Living,Northstar Supply,135.16,86,9
 SKU-0074,Industrial Item 074,Industrial,Metro Wholesale,123.84,126,21
 SKU-0075,Apparel Item 075,Apparel,Prime Components,139.83,142,4
 SKU-0076,Electronics Item 076,Electronics,BluePeak Trading,186.86,42,6
-SKU-0077,OfficeSupplies Item 077,Office Supplies,Summit Distribution,132.89,74,10
-SKU-0078,Home&Living Item 078,Home & Living,Cedar Source,78.0,55,5
+SKU-0077,Office Supplies Item 077,Office Supplies,Summit Distribution,132.89,74,10
+SKU-0078,Home & Living Item 078,Home & Living,Cedar Source,78.0,55,5
 SKU-0079,Industrial Item 079,Industrial,UrbanLine Supply,106.78,85,9
 SKU-0080,Apparel Item 080,Apparel,Atlas Merchants,89.11,167,21
 SKU-0081,Electronics Item 081,Electronics,Northstar Supply,338.94,121,12
-SKU-0082,OfficeSupplies Item 082,Office Supplies,Metro Wholesale,135.9,55,5
-SKU-0083,Home&Living Item 083,Home & Living,Prime Components,81.29,136,3
+SKU-0082,Office Supplies Item 082,Office Supplies,Metro Wholesale,135.9,55,5
+SKU-0083,Home & Living Item 083,Home & Living,Prime Components,81.29,136,3
 SKU-0084,Industrial Item 084,Industrial,BluePeak Trading,130.45,64,20
 SKU-0085,Apparel Item 085,Apparel,Summit Distribution,179.29,41,6
 SKU-0086,Electronics Item 086,Electronics,Cedar Source,197.86,103,3
-SKU-0087,OfficeSupplies Item 087,Office Supplies,UrbanLine Supply,92.53,106,15
-SKU-0088,Home&Living Item 088,Home & Living,Atlas Merchants,165.93,143,20
+SKU-0087,Office Supplies Item 087,Office Supplies,UrbanLine Supply,92.53,106,15
+SKU-0088,Home & Living Item 088,Home & Living,Atlas Merchants,165.93,143,20
 SKU-0089,Industrial Item 089,Industrial,Northstar Supply,19.37,21,8
 SKU-0090,Apparel Item 090,Apparel,Metro Wholesale,142.69,88,5
 SKU-0091,Electronics Item 091,Electronics,Prime Components,212.36,65,11
-SKU-0092,OfficeSupplies Item 092,Office Supplies,BluePeak Trading,130.46,79,11
-SKU-0093,Home&Living Item 093,Home & Living,Summit Distribution,13.72,103,14
+SKU-0092,Office Supplies Item 092,Office Supplies,BluePeak Trading,130.46,79,11
+SKU-0093,Home & Living Item 093,Home & Living,Summit Distribution,13.72,103,14
 SKU-0094,Industrial Item 094,Industrial,Cedar Source,45.92,155,12
 SKU-0095,Apparel Item 095,Apparel,UrbanLine Supply,154.24,150,11
 SKU-0096,Electronics Item 096,Electronics,Atlas Merchants,17.81,139,16
-SKU-0097,OfficeSupplies Item 097,Office Supplies,Northstar Supply,120.61,120,12
-SKU-0098,Home&Living Item 098,Home & Living,Metro Wholesale,104.57,107,3
+SKU-0097,Office Supplies Item 097,Office Supplies,Northstar Supply,120.61,120,12
+SKU-0098,Home & Living Item 098,Home & Living,Metro Wholesale,104.57,107,3
 SKU-0099,Industrial Item 099,Industrial,Prime Components,106.24,102,10
 SKU-0100,Apparel Item 100,Apparel,BluePeak Trading,143.19,60,14
 SKU-0101,Electronics Item 101,Electronics,Summit Distribution,161.2,170,7
-SKU-0102,OfficeSupplies Item 102,Office Supplies,Cedar Source,147.07,102,12
-SKU-0103,Home&Living Item 103,Home & Living,UrbanLine Supply,63.25,153,17
+SKU-0102,Office Supplies Item 102,Office Supplies,Cedar Source,147.07,102,12
+SKU-0103,Home & Living Item 103,Home & Living,UrbanLine Supply,63.25,153,17
 SKU-0104,Industrial Item 104,Industrial,Atlas Merchants,51.47,134,5
 SKU-0105,Apparel Item 105,Apparel,Northstar Supply,172.12,28,17
 SKU-0106,Electronics Item 106,Electronics,Metro Wholesale,320.73,132,14
-SKU-0107,OfficeSupplies Item 107,Office Supplies,Prime Components,117.33,163,13
-SKU-0108,Home&Living Item 108,Home & Living,BluePeak Trading,38.99,57,8
+SKU-0107,Office Supplies Item 107,Office Supplies,Prime Components,117.33,163,13
+SKU-0108,Home & Living Item 108,Home & Living,BluePeak Trading,38.99,57,8
 SKU-0109,Industrial Item 109,Industrial,Summit Distribution,16.22,30,18
 SKU-0110,Apparel Item 110,Apparel,Cedar Source,76.62,125,16
 SKU-0111,Electronics Item 111,Electronics,UrbanLine Supply,14.82,39,9
-SKU-0112,OfficeSupplies Item 112,Office Supplies,Atlas Merchants,105.48,56,12
-SKU-0113,Home&Living Item 113,Home & Living,Northstar Supply,156.18,51,12
+SKU-0112,Office Supplies Item 112,Office Supplies,Atlas Merchants,105.48,56,12
+SKU-0113,Home & Living Item 113,Home & Living,Northstar Supply,156.18,51,12
 SKU-0114,Industrial Item 114,Industrial,Metro Wholesale,66.99,122,11
 SKU-0115,Apparel Item 115,Apparel,Prime Components,3.68,138,20
 SKU-0116,Electronics Item 116,Electronics,BluePeak Trading,118.8,120,4
-SKU-0117,OfficeSupplies Item 117,Office Supplies,Summit Distribution,93.93,40,11
-SKU-0118,Home&Living Item 118,Home & Living,Cedar Source,103.59,22,6
+SKU-0117,Office Supplies Item 117,Office Supplies,Summit Distribution,93.93,40,11
+SKU-0118,Home & Living Item 118,Home & Living,Cedar Source,103.59,22,6
 SKU-0119,Industrial Item 119,Industrial,UrbanLine Supply,93.75,164,14
 SKU-0120,Apparel Item 120,Apparel,Atlas Merchants,164.94,80,3

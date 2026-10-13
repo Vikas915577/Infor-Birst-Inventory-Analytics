@@ -1,13 +1,38 @@
 {
-  "project": "Infor Birst Inventory Analytics - Display Diagnose Decide upgrade",
+  "project": "Infor Birst Inventory Analytics - Display Diagnose Decide interactive preview",
+  "version": "2.1-qa-verified",
   "layout": "flat root for GitHub Pages/mobile upload",
   "data_type": "synthetic",
+  "dashboard_features": [
+    "shared filters across Display/Diagnose/Decide",
+    "region/warehouse/category/risk/search filters",
+    "all vs flagged scope",
+    "dynamic KPI and summary chart updates",
+    "interactive coverage scatter plot",
+    "filtered queue CSV export",
+    "zero-demand guardrail"
+  ],
   "validation": {
-    "python_analysis": "passed",
-    "javascript_syntax": "passed",
-    "local_assets": "passed",
-    "csv_json_reconciliation": "passed",
-    "unit_tests": "6/6 passed"
+    "python_pipeline": "PASS",
+    "automated_tests": "11/11 PASS",
+    "javascript_syntax": "PASS",
+    "HTML_and_relative_assets": "PASS",
+    "dashboard_JSON_KPI_reconciliation": "PASS",
+    "responsive_viewports_px": [
+      320,
+      360,
+      390,
+      414,
+      768,
+      1024,
+      1440
+    ],
+    "horizontal_overflow": "none",
+    "filter_search_reset": "PASS",
+    "filtered_CSV_export": "PASS (North region produced 65 action rows)",
+    "browser_JS_errors": 0,
+    "live_Birst_tenant": "not deployed; build guide included",
+    "live_GitHub_pages": "must replace repo files with this bundle; connector write permission unavailable"
   },
   "files": [
     {
@@ -32,35 +57,35 @@
     },
     {
       "path": "BIRST_MODEL_AND_DASHBOARD_GUIDE.md",
-      "size_bytes": 7201
+      "size_bytes": 8068
     },
     {
       "path": "DATA_DICTIONARY.md",
-      "size_bytes": 1041
+      "size_bytes": 1283
     },
     {
       "path": "DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md",
-      "size_bytes": 5350
+      "size_bytes": 5919
     },
     {
       "path": "README.md",
-      "size_bytes": 6400
+      "size_bytes": 7193
     },
     {
       "path": "RESEARCH_REFERENCES.md",
-      "size_bytes": 2327
+      "size_bytes": 2754
     },
     {
       "path": "TEST_RESULTS.txt",
-      "size_bytes": 1297
+      "size_bytes": 2843
     },
     {
       "path": "UPLOAD_FIX_GUIDE.md",
-      "size_bytes": 1387
+      "size_bytes": 1518
     },
     {
       "path": "analyze_inventory.py",
-      "size_bytes": 12025
+      "size_bytes": 12555
     },
     {
       "path": "category_summary.csv",
@@ -72,7 +97,11 @@
     },
     {
       "path": "dashboard_data.json",
-      "size_bytes": 210930
+      "size_bytes": 593124
+    },
+    {
+      "path": "dashboard_preview.png",
+      "size_bytes": 325680
     },
     {
       "path": "diagnose_category_warehouse.csv",
@@ -80,7 +109,7 @@
     },
     {
       "path": "dim_product.csv",
-      "size_bytes": 8592
+      "size_bytes": 8664
     },
     {
       "path": "dim_warehouse.csv",
@@ -96,7 +125,7 @@
     },
     {
       "path": "index.html",
-      "size_bytes": 27388
+      "size_bytes": 37621
     },
     {
       "path": "inventory_value_by_category.png",
@@ -108,11 +137,11 @@
     },
     {
       "path": "priority_replenishment_list.csv",
-      "size_bytes": 76185
+      "size_bytes": 76339
     },
     {
       "path": "project_metadata.json",
-      "size_bytes": 322
+      "size_bytes": 839
     },
     {
       "path": "requirements.txt",
@@ -124,7 +153,7 @@
     },
     {
       "path": "test_inventory_data.py",
-      "size_bytes": 2133
+      "size_bytes": 6009
     },
     {
       "path": "warehouse_risk_summary.csv",

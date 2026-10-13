@@ -4,6 +4,8 @@
 
 > **Data disclosure:** Every supplied record is synthetic demonstration data. The repository documents how to build and validate a Birst dashboard; it is not a claim that a live Birst dashboard has already been deployed.
 
+![Inventory Risk DDD dashboard preview](dashboard_preview.png)
+
 ## User story
 As an inventory planner, I need to see which SKU–warehouse combinations are exposed to stockout risk, understand why they are flagged, and prioritize a replenishment review—so I can investigate before stock coverage falls below supplier lead time.
 
@@ -18,8 +20,8 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 
 ## Open the dashboard-style project page
 - GitHub Pages entry point: [`index.html`](index.html)
-- The page is mobile-first and includes live filters for the generated review queue. It consumes `dashboard_data.json` and the image/CSV files in this repository.
-- The website visualizes calculated outputs for demonstration; it is not an Infor-hosted dashboard.
+- The page is mobile-first and includes shared filters for warehouse, region, category, risk status, record scope and search. The same filter context updates Display KPIs, warehouse/category summaries, the coverage scatter plot, Diagnose rows, Decide counts, and the filtered-queue CSV. It consumes `dashboard_data.json` and the CSV/PNG files in this repository.
+- The website is an interactive portfolio preview, not an Infor-hosted dashboard. The local filter implementation is custom HTML/JavaScript; reproduce equivalent filter associations explicitly in Birst.
 
 ## Data model
 - `fact_inventory_snapshot`: one row per snapshot date × SKU × warehouse.
@@ -29,7 +31,7 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 The starter data has 480 records, 120 SKUs, 4 warehouses, and one snapshot date: 2026-10-12. Because it is one snapshot, the project does **not** claim a historical trend.
 
 ## KPI definitions
-- Days of Supply = on-hand quantity ÷ average daily demand.
+- Days of Supply = on-hand quantity ÷ average daily demand. If average demand is zero/undefined, days of supply is unavailable; validate demand data before acting on a suggested quantity.
 - Stockout Risk = Days of Supply < supplier lead time.
 - Below Reorder Point = on-hand quantity ≤ reorder point.
 - Inventory Value = on-hand quantity × synthetic unit cost.
@@ -50,16 +52,17 @@ python analyze_inventory.py
 python -m unittest test_inventory_data -v
 ```
 
-The script regenerates CSV output summaries, charts, `findings.txt`, and `dashboard_data.json` in the root. Four or more tests validate keys, joins, recommendation output and JSON reconciliation.
+The script regenerates CSV output summaries, charts, `findings.txt`, and `dashboard_data.json` in the root. Eleven automated tests validate keys, joins, risk logic, review quantities (including zero-demand handling), queue ordering, expected grain and dashboard JSON reconciliation. Browser interaction tests were also run on mobile and desktop viewports.
 
 ## Included files
 - `index.html` — interactive, mobile-friendly DDD case-study page.
+- `dashboard_preview.png` — desktop preview image for the repository README/interview walkthrough.
 - `DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md` — user story, decision owner and definition of done.
 - `BIRST_MODEL_AND_DASHBOARD_GUIDE.md` — Birst-specific DDD dashboard plan and build steps.
 - `RESEARCH_REFERENCES.md` — official Birst documentation and DDD reference notes.
 - `analyze_inventory.py`, `test_inventory_data.py`, `requirements.txt` — reproducible code/tests.
 - `01_schema_postgresql.sql`, `02_inventory_kpi_queries.sql`, `03_data_quality_checks.sql` — SQL schema/queries/quality checks.
-- Source CSVs, output CSVs, `dashboard_data.json`, findings and three charts.
+- Source CSVs, output CSVs, `dashboard_data.json` (all 480 records plus flagged queue), findings and three charts.
 
 ## Sample results — generated data only
 - 220/480 records (45.8%) have days of supply below lead time.

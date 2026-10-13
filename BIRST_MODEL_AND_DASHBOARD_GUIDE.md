@@ -24,7 +24,7 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 **Question:** Is current inventory risk material?
 - KPI dashlets: snapshot date, on-hand units, estimated inventory value, below-reorder records, stockout-risk records, out-of-stock records.
 - Visuals: risk records by warehouse; inventory value by category.
-- Filters: snapshot date, region, warehouse, category.
+- Shared filters: snapshot date, region, warehouse, category, risk status. In the website preview, the same scope updates KPI tiles and category/warehouse charts; implement equivalent filter associations across Birst dashlets and verify each association.
 - Always show the single snapshot scope; do not show trends until multiple dated snapshots exist.
 
 ### Page 2 — DIAGNOSE: Risk Drivers
@@ -32,7 +32,7 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 - Coverage vs supplier lead-time scatter plot.
 - Warehouse × category risk matrix or summary.
 - SKU detail report with stock, demand, days of supply, lead time, reorder point, supplier, unit cost and risk reason.
-- Filters: warehouse, region, category, supplier, risk status.
+- Filters: warehouse, region, category, supplier, risk status. The website preview also supports free-text search and all-records/flagged-only scope.
 - Drill across from a summary row to detailed SKU records where supported by the tenant/design.
 
 ### Page 3 — DECIDE: Replenishment Review Queue
@@ -45,7 +45,7 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 - Export/report controls can be used to hand the queue to an authorized inventory owner; this project does not automate purchase orders.
 
 ## Metric definitions
-- **Days of Supply** = on-hand quantity ÷ average daily demand; if demand is zero, treat it as undefined and review separately.
+- **Days of Supply** = on-hand quantity ÷ average daily demand; if demand is zero/undefined, treat coverage as unavailable, flag zero stock separately, and validate the demand source before relying on a quantity estimate.
 - **Stockout Risk** = days of supply < supplier lead time.
 - **Below Reorder Point** = on-hand quantity ≤ reorder point.
 - **Inventory Value** = on-hand quantity × synthetic unit cost.
@@ -59,10 +59,10 @@ Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE
 4. Define fact-to-dimension joins, confirm unique dimension keys and row count remains 480.
 5. Create a custom subject area with user-friendly field names and measures; hide technical fields not needed by dashboard users.
 6. Build Visualizer reports for Display KPIs, risk by warehouse, category inventory value, coverage vs lead time, and the replenishment-review table.
-7. Create the 3 dashboard pages and shared/associated filters. Infor documentation supports pages with report dashlets, filters and KPI dashlets; filters let users explore subsets and ranges.
-8. Test filter propagation, drill-down/drill-across, exports, zero-demand behavior and totals after joins.
+7. Create the 3 dashboard pages and shared/associated filters. Infor documentation supports pages with report dashlets, filters and KPI dashlets; filters let users explore subsets and ranges. Map each filter to the relevant reports/KPIs and check the resulting values—not every filter association is automatic.
+8. Test filter propagation, drill-down/drill-across, exports, zero-demand behavior and totals after joins. For zero/undefined demand, display days of supply as unavailable and direct the user to verify the demand source rather than treating a review quantity of zero as proof that no replenishment is needed.
 9. Reconcile the same filter selections to `kpi_summary.csv`, `warehouse_risk_summary.csv`, `category_summary.csv`, and `priority_replenishment_list.csv`.
-10. Capture your own screenshots only after the real Birst reports are built and tested. Update the README with what you personally implemented, the date and any deviations.
+10. Reconcile filtered results for at least one warehouse, one category, one risk status and one search case; verify totals agree across KPI, Diagnose and Decide outputs. Capture your own screenshots only after real Birst reports are built and tested. Update the README with what you personally implemented, the date and any deviations.
 
 ## Validation baseline for the included generated sample
 - Fact rows: 480

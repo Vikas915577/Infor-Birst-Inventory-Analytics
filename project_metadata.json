@@ -7,5 +7,24 @@
   "unique_skus": 120,
   "warehouses": 4,
   "analysis_default_data_dir": ".",
-  "analysis_default_output_dir": "."
+  "analysis_default_output_dir": ".",
+  "qa_status": {
+    "python_pipeline": "PASS",
+    "automated_tests": "11/11 PASS",
+    "javascript_syntax": "PASS",
+    "responsive_browser_widths_px": [
+      320,
+      360,
+      390,
+      414,
+      768,
+      1024,
+      1440
+    ],
+    "horizontal_overflow": "none",
+    "interactive_filter_search_reset": "PASS",
+    "filtered_csv_export": "PASS (North scope: 65 records)",
+    "live_birst_tenant": "not deployed; implementation guide included",
+    "live_github_pages_updated_from_environment": false
+  }
 }

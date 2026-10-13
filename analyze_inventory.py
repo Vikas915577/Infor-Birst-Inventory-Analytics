@@ -33,6 +33,7 @@ def analyze(data_dir: Path, output_dir: Path):
     d = f.merge(p, on="sku_id", how="left", validate="many_to_one").merge(w, on="warehouse_id", how="left", validate="many_to_one")
     if len(d) != len(f): raise ValueError("Dimension joins changed fact row count; check join keys")
     d["snapshot_date"] = pd.to_datetime(d.snapshot_date, errors="raise").dt.strftime("%Y-%m-%d")
+    d["zero_or_unknown_demand"] = d.avg_daily_demand <= 0
     d["days_of_supply"] = np.where(d.avg_daily_demand > 0, d.on_hand_qty / d.avg_daily_demand, np.nan)
     d["inventory_value"] = d.on_hand_qty * d.unit_cost
     d["below_reorder_point"] = d.on_hand_qty <= d.reorder_point
@@ -45,8 +46,9 @@ def analyze(data_dir: Path, output_dir: Path):
         [d.out_of_stock, d.stockout_risk, d.below_reorder_point],
         ["P1 · Urgent review", "P1 · Urgent review", "P2 · Replenishment review"], default="P3 · Monitor")
     d["recommended_action"] = np.select(
-        [d.out_of_stock, d.stockout_risk, d.below_reorder_point],
+        [d.out_of_stock & d.zero_or_unknown_demand, d.out_of_stock, d.stockout_risk, d.below_reorder_point],
         [
+            "Stock is zero but demand is zero/undefined; verify demand data and open orders before estimating replenishment.",
             "Confirm open purchase orders and urgently review replenishment with the supplier.",
             "Review supplier lead time and available stock; prioritize replenishment assessment.",
             "Review reorder point, demand assumptions and upcoming replenishment cycle."
@@ -55,8 +57,8 @@ def analyze(data_dir: Path, output_dir: Path):
     target_days = d.lead_time_days + SAFETY_BUFFER_DAYS
     d["illustrative_review_qty"] = np.ceil(np.maximum(0, d.avg_daily_demand * target_days - d.on_hand_qty)).astype("int64")
     d["decision_basis"] = np.select(
-        [d.out_of_stock, d.stockout_risk, d.below_reorder_point],
-        ["No stock on hand", "Coverage is below supplier lead time", "On-hand quantity is at/below reorder point"],
+        [d.out_of_stock & d.zero_or_unknown_demand, d.out_of_stock, d.stockout_risk, d.below_reorder_point],
+        ["No stock and demand is zero/undefined; validate demand first", "No stock on hand", "Coverage is below supplier lead time", "On-hand quantity is at/below reorder point"],
         default="No threshold crossed in this snapshot")
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -127,6 +129,10 @@ def analyze(data_dir: Path, output_dir: Path):
     for _, row in queue.iterrows():
         rec = {k: clean_number(row[k]) for k in queue_cols}
         records.append(rec)
+    all_records = []
+    for _, row in d.iterrows():
+        rec = {k: clean_number(row[k]) for k in queue_cols}
+        all_records.append(rec)
     payload = {
         "disclosure": "Synthetic demonstration data only. One snapshot, not a trend. Suggestions are for review, not automatic orders.",
         "snapshot_date": snap,
@@ -140,7 +146,9 @@ def analyze(data_dir: Path, output_dir: Path):
         "urgent_review_records": p1, "reorder_review_records": p2,
         "safety_buffer_days_assumption": SAFETY_BUFFER_DAYS,
         "warehouse_summary": ws.to_dict(orient="records"), "category_summary": cs.to_dict(orient="records"),
-        "diagnose_summary": diag.to_dict(orient="records"), "action_queue": records,
+        "diagnose_summary": diag.to_dict(orient="records"),
+        "inventory_records": all_records,
+        "action_queue": records,
         "queue_records_total": len(queue),
         "charts": {"warehouse_risk": "stockout_risk_by_warehouse.png", "category_value": "inventory_value_by_category.png", "coverage": "coverage_vs_lead_time.png"}
     }

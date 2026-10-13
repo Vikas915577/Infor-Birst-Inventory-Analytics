@@ -59,11 +59,13 @@ The 7-day buffer is a declared demo assumption. The quantity is not an auto-purc
 3. **Explainable risk:** Every P1/P2 row shows the rule that triggered its status.
 4. **Priority order:** Out-of-stock records first, then stockout-risk records, then below-reorder records; sort by lowest days of supply within priority.
 5. **Transparent quantity:** Suggested quantity shows the 7-day-buffer assumption and is labeled for review only.
-6. **Filter consistency:** Warehouse, region, category and risk filters must update the same visible KPI/diagnosis/decision context in the actual Birst implementation.
-7. **Join integrity:** Product and warehouse dimensions join many-to-one; fact row count remains unchanged after joins.
-8. **Data quality:** Duplicate keys, missing dimension matches, negative quantities, missing cost and zero-demand division are checked.
-9. **Privacy:** Only synthetic data is present. No employer/client records or screenshots are committed.
-10. **Ownership:** The dashboard does not place or claim to place purchase orders; an authorized user makes the decision.
+6. **Birst filter consistency:** Warehouse, region, category and risk filters must update the same visible KPI/diagnosis/decision context in the actual Birst implementation.
+7. **Interactive preview consistency:** In the GitHub Pages demo, shared filters update Display KPIs, warehouse/category summaries, the coverage scatter plot, Diagnose rows, Decide counts and the exported filtered queue. Reset returns the page to all 480 records.
+8. **Export consistency:** The downloaded review-queue CSV contains only P1/P2 rows matching active filters; it must not silently export the unfiltered full queue.
+9. **Join integrity:** Product and warehouse dimensions join many-to-one; fact row count remains unchanged after joins.
+10. **Data quality:** Duplicate keys, missing dimension matches, negative quantities, missing cost and zero-demand division are checked. If demand is zero/undefined, coverage is undefined and the next step is to verify demand data rather than trust a quantity estimate.
+11. **Privacy:** Only synthetic data is present. No employer/client records or screenshots are committed.
+12. **Ownership:** The dashboard does not place or claim to place purchase orders; an authorized user makes the decision.
 
 ## Definition of done for Birst
 - Load the CSVs in a personal Birst practice space.

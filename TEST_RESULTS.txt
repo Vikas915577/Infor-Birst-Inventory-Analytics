@@ -1,23 +1,36 @@
-Local checks for this DDD upgrade:
-- Python analysis: PASS
-- Node JavaScript syntax check: PASS
-- Local HTML assets exist in bundle: PASS
-- Dashboard JSON metrics reconcile with generated CSVs: PASS
-- Automated unit tests: PASS (6/6)
+INVENTORY RISK — DISPLAY → DIAGNOSE → DECIDE
+QA / ACCEPTANCE TEST REPORT
+Generated: 2026-10-13
 
-Analysis complete: 480 records | 220 stockout-risk | 161 below reorder | action queue 252
+DATA PIPELINE
+- Python analysis run: PASS (480 fact records; 220 stockout-risk records; 161 at/below reorder point; 252 flagged queue records).
+- Fact grain: PASS (one row per snapshot date × SKU × warehouse; starter data has one snapshot date).
+- Product / warehouse foreign keys: PASS.
+- Nonnegative stock, demand, costs, reorder point and lead time: PASS.
+- Suggested review-quantity formula reconciliation: PASS. Seven-day buffer is a synthetic demonstration assumption, not an approved policy.
+- Zero/undefined demand handling: PASS. Days of supply becomes unavailable; zero-stock with zero demand directs the reviewer to validate demand data before estimating replenishment.
+- dashboard_data.json vs source CSV / generated output reconciliation: PASS (all 480 records and 252 flagged records included).
 
+AUTOMATED TESTS
+- 11/11 tests passed (unique/grain keys, foreign keys, non-negative inputs, expected grain, row/queue reconciliation, KPI reconciliation, flagged-only queue, review quantity, priority ordering, required assets, and zero-demand edge case).
 
-test_dashboard_metrics_reconcile (test_inventory_data.InventoryDDDDashboardTests.test_dashboard_metrics_reconcile) ... ok
-test_decision_queue_contains_only_flagged_records (test_inventory_data.InventoryDDDDashboardTests.test_decision_queue_contains_only_flagged_records) ... ok
-test_dimension_and_fact_keys_unique (test_inventory_data.InventoryDDDDashboardTests.test_dimension_and_fact_keys_unique) ... ok
-test_expected_fact_grain (test_inventory_data.InventoryDDDDashboardTests.test_expected_fact_grain) ... ok
-test_foreign_keys_resolve (test_inventory_data.InventoryDDDDashboardTests.test_foreign_keys_resolve) ... ok
-test_nonnegative_inputs (test_inventory_data.InventoryDDDDashboardTests.test_nonnegative_inputs) ... ok
+BROWSER / INTERACTION TESTS
+- JavaScript syntax check (Node): PASS.
+- Chromium page render at mobile widths 320, 360, 390 and 414 px: PASS; no horizontal page overflow.
+- Chromium page render at tablet/desktop widths 768, 1024 and 1440 px: PASS; no horizontal page overflow.
+- Dashboard UI rendered against generated dashboard JSON: PASS.
+- Shared Region filter: PASS (480 rows -> 120 North-region rows; 252 flagged -> 65 matching actions).
+- Shared Warehouse filter: PASS.
+- Search narrowing: PASS (searching SKU-0001 within North region returns one matching row).
+- Record scope (all / flagged only): PASS.
+- Risk-status filter (Healthy): PASS (zero flagged actions; clear empty state).
+- Reset filters: PASS (restores all 480 records and default record scope).
+- Filtered queue CSV download: PASS (North-region filter exported 65 action rows plus header).
+- Browser JavaScript errors during tested interactions: 0.
+- Local HTML links/assets: PASS; relative linked files are present in the bundle.
 
-----------------------------------------------------------------------
-Ran 6 tests in 0.010s
-
-OK
-
-Note: These checks validate the static bundle and synthetic-data pipeline. They do not mean a live Infor Birst tenant dashboard has been deployed.
+INTERPRETATION / DEPLOYMENT LIMITS
+- All supplied business data is synthetic. Findings are a portfolio demonstration, not employer outcomes.
+- The website is an interactive GitHub Pages preview implemented in HTML/JavaScript. It is not a live Infor Birst dashboard.
+- Infor Birst must still be configured in a practice tenant: load CSVs, model joins/subject area, build KPI/report dashlets, associate filters, and reconcile results.
+- GitHub Pages deployment itself has not been re-published from this environment because GitHub write access was rejected by the connector. Upload/replace the ZIP contents in the repository and confirm Pages is configured for main/(root).

@@ -27,3 +27,6 @@ Applied here as:
 
 ## Product design decisions inferred for this portfolio
 The exact inventory thresholds and 7-day safety buffer are not prescribed by Infor; they are transparent synthetic-demo assumptions. A real organization must replace them with approved inventory policy and reconcile against its source of truth.
+
+## Implementation note for the portfolio preview
+The GitHub Pages preview uses custom JavaScript to apply one shared filter context to Display, Diagnose and Decide and to export the filtered review queue. Native Infor Birst dashboards use dashboard filters and filter/dashlet associations; recreate and test those associations in Birst explicitly rather than assuming the static preview configuration transfers into a tenant.
