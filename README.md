@@ -1,27 +1,48 @@
-# Inventory & Stock Risk Analytics — Infor Birst Portfolio Project
+# Infor Birst Inventory Analytics — Display → Diagnose → Decide
 
-**Live project page:** https://vikas915577.github.io/Infor-Birst-Inventory-Analytics/
+**A decision-focused BI portfolio project** built around an inventory planner’s user story. It uses SQL, Python, synthetic inventory data, and a step-by-step Infor Birst implementation blueprint.
 
-**Goal:** Demonstrate inventory data modeling, SQL analysis, Python-based validation, and an implementation blueprint for **Infor Birst**.
+> **Data disclosure:** Every supplied record is synthetic demonstration data. The repository documents how to build and validate a Birst dashboard; it is not a claim that a live Birst dashboard has already been deployed.
 
-> **Data disclosure:** All sample rows are synthetic demonstration data, not real company/client records. This repository contains a Birst implementation guide, not a claim that a dashboard is already deployed in Birst.
+## User story
+As an inventory planner, I need to see which SKU–warehouse combinations are exposed to stockout risk, understand why they are flagged, and prioritize a replenishment review—so I can investigate before stock coverage falls below supplier lead time.
 
-## Business questions
-1. Which SKU–warehouse records have less stock coverage than supplier lead time?
-2. Which records are at or below their reorder point?
-3. How does estimated inventory value differ by category and warehouse?
-4. Which items should be prioritized for replenishment review?
+## Display → Diagnose → Decide
+| Stage | User question | Birst page | Main outputs |
+|---|---|---|---|
+| **Display** | Is current inventory risk material? | Inventory Overview | On-hand units, estimated value, below-reorder records, stockout-risk records, out-of-stock records |
+| **Diagnose** | Where is the risk and why? | Risk Diagnosis | Warehouse/category risk breakdown, coverage-vs-lead-time chart, SKU detail and risk reason |
+| **Decide** | What should the authorized user review first? | Replenishment Review Queue | P1/P2 prioritization, decision basis, suggested next step, illustrative review quantity |
+
+Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md) for personas, acceptance criteria, rules and the decision owner.
+
+## Open the dashboard-style project page
+- GitHub Pages entry point: [`index.html`](index.html)
+- The page is mobile-first and includes live filters for the generated review queue. It consumes `dashboard_data.json` and the image/CSV files in this repository.
+- The website visualizes calculated outputs for demonstration; it is not an Infor-hosted dashboard.
+
+## Data model
+- `fact_inventory_snapshot`: one row per snapshot date × SKU × warehouse.
+- `dim_product`: category, supplier, synthetic unit cost, reorder point, lead time.
+- `dim_warehouse`: warehouse and region.
+
+The starter data has 480 records, 120 SKUs, 4 warehouses, and one snapshot date: 2026-10-12. Because it is one snapshot, the project does **not** claim a historical trend.
+
+## KPI definitions
+- Days of Supply = on-hand quantity ÷ average daily demand.
+- Stockout Risk = Days of Supply < supplier lead time.
+- Below Reorder Point = on-hand quantity ≤ reorder point.
+- Inventory Value = on-hand quantity × synthetic unit cost.
+- Illustrative Review Quantity = max(0, ceil(daily demand × (lead time + 7-day buffer) − on-hand)). The 7-day buffer is a demo assumption, not company policy or an auto-order instruction.
 
 ## Tools
-- **Infor Birst:** model design, subject-area attributes/measures, Visualizer reports, KPI tiles and dashboard filters.
-- **SQL (PostgreSQL-compatible):** joins, aggregation, replenishment prioritisation and data-quality checks.
-- **Python:** pandas, NumPy and matplotlib for risk flags, summaries, charts and checks.
-
-## Important: layout matches mobile upload
-All source files and sample CSVs are in the repository root. The Python script and test use this flat layout, so the run instructions work after extracting this ZIP and uploading the files from the inner folder.
+- **Infor Birst:** proposed fact/dimension model, subject area, KPI dashlets, Visualizer reports, dashboard filters and detail/review pages.
+- SQL (PostgreSQL-compatible): joins, aggregation, data quality and decision queue.
+- Python (pandas, NumPy, matplotlib): validation, risk flags, summaries, charts, JSON for the website.
+- GitHub Pages: static project case-study page (separate from a live Birst dashboard).
 
 ## Run locally
-Python 3.10+ recommended.
+Python 3.10+ recommended; run commands from this folder:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -29,44 +50,44 @@ python analyze_inventory.py
 python -m unittest test_inventory_data -v
 ```
 
-The script reads `dim_product.csv`, `dim_warehouse.csv`, and `fact_inventory_snapshot.csv` from the current directory. It regenerates KPI summaries, replenishment rows, findings and charts in the same folder.
+The script regenerates CSV output summaries, charts, `findings.txt`, and `dashboard_data.json` in the root. Four or more tests validate keys, joins, recommendation output and JSON reconciliation.
 
 ## Included files
-- `index.html` — mobile-friendly GitHub Pages landing page.
-- `dim_product.csv`, `dim_warehouse.csv`, `fact_inventory_snapshot.csv` — synthetic source data.
-- `analyze_inventory.py` — repeatable Python analysis.
-- `01_schema_postgresql.sql`, `02_inventory_kpi_queries.sql`, `03_data_quality_checks.sql` — SQL schema and analysis.
-- `BIRST_MODEL_AND_DASHBOARD_GUIDE.md` — Birst model, measures, dashboard pages and validation plan.
-- `kpi_summary.csv`, `warehouse_risk_summary.csv`, `category_summary.csv`, `priority_replenishment_list.csv`, `findings.txt` — generated demo outputs.
-- `stockout_risk_by_warehouse.png`, `inventory_value_by_category.png`, `coverage_vs_lead_time.png` — generated charts.
-- `DATA_DICTIONARY.md`, `requirements.txt`, `test_inventory_data.py`, `UPLOAD_FIX_GUIDE.md`.
+- `index.html` — interactive, mobile-friendly DDD case-study page.
+- `DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md` — user story, decision owner and definition of done.
+- `BIRST_MODEL_AND_DASHBOARD_GUIDE.md` — Birst-specific DDD dashboard plan and build steps.
+- `RESEARCH_REFERENCES.md` — official Birst documentation and DDD reference notes.
+- `analyze_inventory.py`, `test_inventory_data.py`, `requirements.txt` — reproducible code/tests.
+- `01_schema_postgresql.sql`, `02_inventory_kpi_queries.sql`, `03_data_quality_checks.sql` — SQL schema/queries/quality checks.
+- Source CSVs, output CSVs, `dashboard_data.json`, findings and three charts.
 
-## Sample findings (synthetic data only)
-- 220 of 480 SKU–warehouse records (45.8%) have days of supply below supplier lead time.
-- 161 of 480 records (33.5%) are at or below their reorder point.
-- North Hub has the highest number of stockout-risk records (59).
-- Electronics has the largest on-hand inventory value (3,262,097.64 synthetic currency units).
+## Sample results — generated data only
+- 220/480 records (45.8%) have days of supply below lead time.
+- 161/480 records (33.5%) are at/below reorder point.
+- 81,978 on-hand units and 9,654,146.75 synthetic currency units of estimated inventory value.
 
-These numbers are generated from the sample dataset only, not real-world business results.
+These figures describe only the current generated sample and must not be represented as a real employer outcome.
 
-## Definitions and limitations
-- Days of Supply = On-hand Quantity / Average Daily Demand.
-- Stockout Risk = Days of Supply < Supplier Lead Time.
-- Below Reorder Point = On-hand Quantity <= Reorder Point.
-- Inventory Value = On-hand Quantity × Unit Cost.
-- Counts are SKU–warehouse records, not necessarily distinct SKUs.
-- Only one snapshot is included, so this is a single-date analysis, not a historical trend.
-- The simplified risk rule omits safety stock, demand variation, open purchase orders and order multiples.
+## Decision safety and limitations
+- P1: out of stock or days of supply below lead time.
+- P2: on-hand at/below reorder point, unless already P1.
+- P3: no current threshold crossed.
+- The suggested quantity is an illustrative review aid. Validate existing purchase orders, safety stock, forecast/seasonality, supplier MOQ/pack size, budget and approvals before acting. The dashboard does not place purchase orders.
+- Counts are SKU–warehouse records, not unique SKU counts unless distinct-counted.
+- Data is synthetic. Never commit private employer/client data.
 
-## Infor Birst dashboard plan
-The guide describes an Inventory & Replenishment subject area, joins, attributes/measures, KPI tiles, Visualizer reports and filters. Import the CSVs into a practice Birst space and reconcile totals against the output files. Only add a Birst screenshot after building and testing it.
+## Build the actual Birst dashboard
+1. Open a practice/demo Birst space; import the three source CSVs.
+2. Create the fact/dimension joins; confirm row count remains 480.
+3. Define a user-friendly `Inventory & Replenishment` subject area.
+4. Build the 3 DDD dashboard pages and filters according to `BIRST_MODEL_AND_DASHBOARD_GUIDE.md`.
+5. Reconcile Birst KPIs to `kpi_summary.csv`, `warehouse_risk_summary.csv`, and `category_summary.csv`.
+6. Test filters, detail navigation, report exports and zero-demand behavior.
+7. Add Birst screenshots to this repo only after you actually build and validate the dashboard.
 
-Official references: [Infor Analytics with Birst](https://developer.infor.com/tutorials/analytics-with-birst) · [How to connect to a file](https://developer.infor.com/tutorials/analytics/how-to-connect-to-a-file).
-
-## Resume wording — only after you have reviewed and completed the work
-**Inventory & Stock Risk Analytics | SQL, Python, Infor Birst (implementation blueprint)**
-- Modeled inventory snapshot, product and warehouse data; analyzed stock coverage, reorder points and estimated inventory value.
-- Designed a Birst implementation plan with subject-area attributes/measures, KPI tiles, Visualizer reports and dashboard filters.
-- Evaluated replenishment-risk records using a clearly labelled synthetic dataset.
-
-Do not claim a Birst dashboard was deployed until you have built and tested it in your own Birst environment.
+## Research
+- [Infor Birst dashboard creation](https://docs.infor.com/birst/latest/en-us/birstolh/dashboards_user/ifj1655271234451.html)
+- [KPI dashlets](https://docs.infor.com/birst/latest/en-us/birstolh/dashboards_user/jmt1655271239123.html)
+- [Dashboard filters](https://docs.infor.com/birst/2026.10/en-us/birstolh/dashboards_user/ieb1655271241138.html)
+- [Subject areas](https://docs.infor.com/birst/latest/en-us/birstolh/reports_user/bha1655271152572.html)
+- [Infor Display → Diagnose → Decide reference (VBD white paper)](https://dam.infor.com/api/public/content/12f4f63a51784e6d9c0046b63385c2fd?v=b0eacc16)

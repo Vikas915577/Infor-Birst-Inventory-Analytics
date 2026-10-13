@@ -1,0 +1,23 @@
+Local checks for this DDD upgrade:
+- Python analysis: PASS
+- Node JavaScript syntax check: PASS
+- Local HTML assets exist in bundle: PASS
+- Dashboard JSON metrics reconcile with generated CSVs: PASS
+- Automated unit tests: PASS (6/6)
+
+Analysis complete: 480 records | 220 stockout-risk | 161 below reorder | action queue 252
+
+
+test_dashboard_metrics_reconcile (test_inventory_data.InventoryDDDDashboardTests.test_dashboard_metrics_reconcile) ... ok
+test_decision_queue_contains_only_flagged_records (test_inventory_data.InventoryDDDDashboardTests.test_decision_queue_contains_only_flagged_records) ... ok
+test_dimension_and_fact_keys_unique (test_inventory_data.InventoryDDDDashboardTests.test_dimension_and_fact_keys_unique) ... ok
+test_expected_fact_grain (test_inventory_data.InventoryDDDDashboardTests.test_expected_fact_grain) ... ok
+test_foreign_keys_resolve (test_inventory_data.InventoryDDDDashboardTests.test_foreign_keys_resolve) ... ok
+test_nonnegative_inputs (test_inventory_data.InventoryDDDDashboardTests.test_nonnegative_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.010s
+
+OK
+
+Note: These checks validate the static bundle and synthetic-data pipeline. They do not mean a live Infor Birst tenant dashboard has been deployed.

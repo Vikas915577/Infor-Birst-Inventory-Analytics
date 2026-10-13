@@ -1,41 +1,94 @@
-# Infor Birst Build Guide — Inventory & Stock Risk Analytics
+# Infor Birst Blueprint — Inventory & Stock Risk Analytics
 
-## Project status
-This is a Birst-oriented portfolio blueprint using synthetic data, not an already-deployed dashboard. Use a personal practice space only.
+> **Project state:** This is a synthetic-data portfolio and implementation blueprint. It is not evidence of a deployed Birst dashboard. The actual Birst build must be completed and reconciled in a personal practice space before claiming it as implemented.
 
-## Source files
-All CSVs are in the repository root: `dim_product.csv`, `dim_warehouse.csv`, and `fact_inventory_snapshot.csv`. The fact grain is one row per SKU × warehouse × snapshot date (480 records, 120 SKUs, 4 warehouses, snapshot date 2026-10-12).
+## The user story
+As an inventory planner or warehouse operations lead, I need to identify the riskiest SKU–warehouse combinations, understand what caused the flag, and prioritize a replenishment review—without the dashboard automatically placing orders.
 
-## Logical model / subject area
-Join `fact_inventory_snapshot.sku_id` to `dim_product.sku_id`, and `warehouse_id` to `dim_warehouse.warehouse_id`. Subject area: **Inventory & Replenishment**.
+Read [`DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md`](DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md) for decision owner, acceptance criteria, metric definitions and the complete Display → Diagnose → Decide flow.
 
-**Attributes:** Snapshot Date, SKU ID, Product Name, Category, Supplier, Warehouse Name, Region.
+## Data model
+**Fact:** `fact_inventory_snapshot`, at one row per snapshot date × SKU × warehouse.
 
-**Measures:** On-hand Units = SUM(on_hand_qty); Inventory Value = SUM(on_hand_qty × unit_cost); Inventory Records = COUNT(snapshot_id); Below Reorder Point = count where on_hand_qty <= reorder_point; Stockout Risk = count where days of supply < lead time; Out of Stock = count where on_hand_qty = 0.
+**Dimensions:**
+- `dim_product`: SKU, product name, category, supplier, synthetic unit cost, reorder point, supplier lead time.
+- `dim_warehouse`: warehouse name and region.
 
-**Derived calculations:** Days of Supply = on_hand_qty / avg_daily_demand (handle zero demand). Stockout Risk = Days of Supply < Supplier Lead Time. Below Reorder Point = On-hand Quantity <= Reorder Point. These rules are simplified portfolio heuristics, not production policy.
+**Joins:** Fact SKU → Product SKU; Fact Warehouse ID → Warehouse ID. Confirm that each dimension key is unique and row count is unchanged after joining.
 
-## Suggested dashboard pages
-1. **Inventory Overview:** KPI tiles for on-hand units, inventory value, below-reorder records and stockout-risk records; charts for risk by warehouse and value by category; filters for snapshot date, region, warehouse and category.
-2. **Replenishment Priority:** SKU, category, warehouse, stock, demand, days of supply, reorder point, lead time, status and supplier; prioritize out-of-stock and lowest-coverage records.
-3. **Risk Drivers:** scatter plot of days of supply vs lead time plus risk counts by warehouse/category.
+**Business-friendly subject area:** `Inventory & Replenishment`, with only required attributes/measures. Infor documents that subject areas expose attributes and measures for reporting, and recommends custom subject areas with user-friendly labeling and only relevant fields.
 
-## Build steps
-1. Upload the three root CSVs to a personal Birst demo space. Infor supports CSV/file source workflows.
-2. Verify data types and define joins; validate that fact row count remains 480 after joins.
-3. Add attributes/measures to a user-friendly subject area.
-4. Build Visualizer reports for risk by warehouse, inventory value by category, coverage vs lead time, and the replenishment table.
-5. Add reports to dashboard pages with KPI tiles and filters.
-6. Reconcile totals with root `kpi_summary.csv`, `warehouse_risk_summary.csv`, and `category_summary.csv`.
-7. Test filter propagation, zero demand, nulls, export and refresh; add screenshots only after validation.
+## Proposed DDD dashboard pages
 
-## Expected demo controls
+### Page 1 — DISPLAY: Inventory Overview
+**Question:** Is current inventory risk material?
+- KPI dashlets: snapshot date, on-hand units, estimated inventory value, below-reorder records, stockout-risk records, out-of-stock records.
+- Visuals: risk records by warehouse; inventory value by category.
+- Filters: snapshot date, region, warehouse, category.
+- Always show the single snapshot scope; do not show trends until multiple dated snapshots exist.
+
+### Page 2 — DIAGNOSE: Risk Drivers
+**Question:** Where is the risk, and what triggered it?
+- Coverage vs supplier lead-time scatter plot.
+- Warehouse × category risk matrix or summary.
+- SKU detail report with stock, demand, days of supply, lead time, reorder point, supplier, unit cost and risk reason.
+- Filters: warehouse, region, category, supplier, risk status.
+- Drill across from a summary row to detailed SKU records where supported by the tenant/design.
+
+### Page 3 — DECIDE: Replenishment Review Queue
+**Question:** Which records require review first, and what must be checked?
+- P1: out of stock or days of supply below lead time.
+- P2: on hand at/below reorder point but not P1.
+- P3: monitor; kept out of the urgent queue.
+- Table fields: priority, SKU, product, warehouse, on hand, daily demand, days of supply, lead time, reorder point, illustrative review quantity, decision basis, suggested next step.
+- Add a text block explaining the safety buffer assumption and the need to validate open POs, supplier pack sizes/MOQs, forecast, safety stock, budget and approvals.
+- Export/report controls can be used to hand the queue to an authorized inventory owner; this project does not automate purchase orders.
+
+## Metric definitions
+- **Days of Supply** = on-hand quantity ÷ average daily demand; if demand is zero, treat it as undefined and review separately.
+- **Stockout Risk** = days of supply < supplier lead time.
+- **Below Reorder Point** = on-hand quantity ≤ reorder point.
+- **Inventory Value** = on-hand quantity × synthetic unit cost.
+- **Illustrative Review Qty** = max(0, ceil(avg daily demand × (lead time + 7-day buffer) − on hand)). The buffer is a demo assumption, not a company policy.
+- Counts are at SKU–warehouse row grain, not necessarily distinct SKU counts.
+
+## Recommended Infor Birst build sequence
+1. Use a personal practice/demo space and only the included synthetic CSV files.
+2. Import `dim_product.csv`, `dim_warehouse.csv`, `fact_inventory_snapshot.csv` as sources using the approved file connection/upload workflow.
+3. Check types: IDs as text, snapshot date as date, quantities/reorder/lead time as numeric, demand/cost as decimal.
+4. Define fact-to-dimension joins, confirm unique dimension keys and row count remains 480.
+5. Create a custom subject area with user-friendly field names and measures; hide technical fields not needed by dashboard users.
+6. Build Visualizer reports for Display KPIs, risk by warehouse, category inventory value, coverage vs lead time, and the replenishment-review table.
+7. Create the 3 dashboard pages and shared/associated filters. Infor documentation supports pages with report dashlets, filters and KPI dashlets; filters let users explore subsets and ranges.
+8. Test filter propagation, drill-down/drill-across, exports, zero-demand behavior and totals after joins.
+9. Reconcile the same filter selections to `kpi_summary.csv`, `warehouse_risk_summary.csv`, `category_summary.csv`, and `priority_replenishment_list.csv`.
+10. Capture your own screenshots only after the real Birst reports are built and tested. Update the README with what you personally implemented, the date and any deviations.
+
+## Validation baseline for the included generated sample
 - Fact rows: 480
+- SKUs: 120
+- Warehouses: 4
 - On-hand units: 81,978
 - Inventory value: 9,654,146.75 synthetic currency units
+- Stockout-risk records: 220 (45.8% of SKU–warehouse records)
+- At/below reorder point: 161 (33.5% of records)
 
-## Official references
+## Data quality and operational limitations
+- All data is synthetic; no real supplier/customer inventory is represented.
+- Only one snapshot exists; time trends or stock movement cannot be inferred.
+- Inventory value uses generated unit costs with no declared currency; it is illustrative.
+- The heuristic does not model forecast uncertainty, seasonal demand, safety stock policy, open purchase orders, order multiples or supplier constraints.
+- Counts must be labeled “records” unless a distinct-SKU metric is explicitly calculated.
+- Keep data refresh date and snapshot date separate.
+
+## Official Infor references
+- [Creating dashboards](https://docs.infor.com/birst/latest/en-us/birstolh/dashboards_user/ifj1655271234451.html)
+- [Adding KPI dashlets](https://docs.infor.com/birst/latest/en-us/birstolh/dashboards_user/jmt1655271239123.html)
+- [Dashboard filters](https://docs.infor.com/birst/2026.10/en-us/birstolh/dashboards_user/ieb1655271241138.html)
+- [Visualizer filtering](https://docs.infor.com/birst/2025.x/en-us/birstolh/reports_user/xah1655271135431.html)
+- [Subject areas](https://docs.infor.com/birst/latest/en-us/birstolh/reports_user/bha1655271152572.html)
 - [Infor Analytics with Birst](https://developer.infor.com/tutorials/analytics-with-birst)
-- [How to connect to a file](https://developer.infor.com/tutorials/analytics/how-to-connect-to-a-file)
-- [Birst dashboards](https://docs.infor.com/birst/latest/en-us/birstolh/dashboards_user/ifj1655271234451.html)
-- [Visualizer filters](https://docs.infor.com/birst/2025.x/en-us/birstolh/reports_user/xah1655271135431.html)
+- [Infor file connection tutorial](https://developer.infor.com/tutorials/analytics/how-to-connect-to-a-file)
+
+## DDD research note
+Display → Diagnose → Decide is described in Infor’s value-based design material as a guided analytics information architecture. In this project, Display surfaces the signal, Diagnose explains the risk by dimension and SKU, and Decide turns that diagnosis into a prioritized review queue with explicit assumptions.

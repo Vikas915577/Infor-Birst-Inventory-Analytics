@@ -1,0 +1,21 @@
+category,warehouse_name,records,stockout_risk_records,below_reorder_records,on_hand_units,inventory_value
+Apparel,Central Hub,24,10,9,3735,430301.2
+Apparel,North Hub,24,9,8,4917,542342.66
+Apparel,South Hub,24,11,5,4562,562338.66
+Apparel,West Hub,24,14,8,4726,524549.29
+Electronics,Central Hub,24,8,8,4054,954915.34
+Electronics,North Hub,24,13,9,3003,661698.32
+Electronics,South Hub,24,9,5,4041,921299.36
+Electronics,West Hub,24,11,9,3582,724184.62
+Home & Living,Central Hub,24,10,7,4530,439736.18
+Home & Living,North Hub,24,9,7,4623,377866.62
+Home & Living,South Hub,24,13,7,3867,333729.84
+Home & Living,West Hub,24,11,9,3853,291671.79000000004
+Industrial,Central Hub,24,10,6,5620,445506.77
+Industrial,North Hub,24,13,12,3463,311604.04
+Industrial,South Hub,24,10,12,3775,292634.95
+Industrial,West Hub,24,10,8,4990,399271.25999999995
+Office Supplies,Central Hub,24,10,5,4337,433951.99
+Office Supplies,North Hub,24,15,11,3059,303901.47
+Office Supplies,South Hub,24,12,6,4020,413504.29
+Office Supplies,West Hub,24,12,10,3221,289138.1

@@ -1,0 +1,134 @@
+{
+  "project": "Infor Birst Inventory Analytics - Display Diagnose Decide upgrade",
+  "layout": "flat root for GitHub Pages/mobile upload",
+  "data_type": "synthetic",
+  "validation": {
+    "python_analysis": "passed",
+    "javascript_syntax": "passed",
+    "local_assets": "passed",
+    "csv_json_reconciliation": "passed",
+    "unit_tests": "6/6 passed"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 57
+    },
+    {
+      "path": ".nojekyll",
+      "size_bytes": 0
+    },
+    {
+      "path": "01_schema_postgresql.sql",
+      "size_bytes": 888
+    },
+    {
+      "path": "02_inventory_kpi_queries.sql",
+      "size_bytes": 4370
+    },
+    {
+      "path": "03_data_quality_checks.sql",
+      "size_bytes": 649
+    },
+    {
+      "path": "BIRST_MODEL_AND_DASHBOARD_GUIDE.md",
+      "size_bytes": 7201
+    },
+    {
+      "path": "DATA_DICTIONARY.md",
+      "size_bytes": 1041
+    },
+    {
+      "path": "DDD_USER_STORY_AND_ACCEPTANCE_CRITERIA.md",
+      "size_bytes": 5350
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 6400
+    },
+    {
+      "path": "RESEARCH_REFERENCES.md",
+      "size_bytes": 2327
+    },
+    {
+      "path": "TEST_RESULTS.txt",
+      "size_bytes": 1297
+    },
+    {
+      "path": "UPLOAD_FIX_GUIDE.md",
+      "size_bytes": 1387
+    },
+    {
+      "path": "analyze_inventory.py",
+      "size_bytes": 12025
+    },
+    {
+      "path": "category_summary.csv",
+      "size_bytes": 259
+    },
+    {
+      "path": "coverage_vs_lead_time.png",
+      "size_bytes": 65370
+    },
+    {
+      "path": "dashboard_data.json",
+      "size_bytes": 210930
+    },
+    {
+      "path": "diagnose_category_warehouse.csv",
+      "size_bytes": 1031
+    },
+    {
+      "path": "dim_product.csv",
+      "size_bytes": 8592
+    },
+    {
+      "path": "dim_warehouse.csv",
+      "size_bytes": 125
+    },
+    {
+      "path": "fact_inventory_snapshot.csv",
+      "size_bytes": 22140
+    },
+    {
+      "path": "findings.txt",
+      "size_bytes": 664
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 27388
+    },
+    {
+      "path": "inventory_value_by_category.png",
+      "size_bytes": 61924
+    },
+    {
+      "path": "kpi_summary.csv",
+      "size_bytes": 220
+    },
+    {
+      "path": "priority_replenishment_list.csv",
+      "size_bytes": 76185
+    },
+    {
+      "path": "project_metadata.json",
+      "size_bytes": 322
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 40
+    },
+    {
+      "path": "stockout_risk_by_warehouse.png",
+      "size_bytes": 54559
+    },
+    {
+      "path": "test_inventory_data.py",
+      "size_bytes": 2133
+    },
+    {
+      "path": "warehouse_risk_summary.csv",
+      "size_bytes": 353
+    }
+  ]
+}

@@ -1,8 +1,10 @@
-DEMO FINDINGS — synthetic dataset only
+DEMO FINDINGS — synthetic snapshot only
 
-- 220 of 480 records (45.8%) have days of supply below lead time.
-- 161 of 480 records (33.5%) are at or below reorder point.
-- North Hub has the highest stockout-risk record count (59).
-- Electronics has the largest inventory value (3,262,097.64 synthetic currency units).
+- 220 of 480 SKU–warehouse records (45.8%) have days of supply below supplier lead time.
+- 161 of 480 records (33.5%) are at or below their reorder point.
+- 0 records are out of stock in this generated snapshot.
+- North Hub has the highest count of stockout-risk records (59).
+- Electronics has the largest estimated on-hand inventory value (3,262,097.64 synthetic currency units).
+- The decision queue contains 220 P1 urgent-review records and 32 P2 reorder-review records.
 
-These are generated sample-data findings, not real company results.
+These are generated sample-data findings, not actual company results. Review the action basis and validate open purchase orders before acting.
